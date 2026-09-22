@@ -1,0 +1,44 @@
+CS 2200 Project 4
+
+Name: Arban Gjyzari
+GTID: 904041731
+GT_Email: agjyzari3@gatech.edu
+Section: A
+
+==============================================
+
+___________________________
+Problem-1 (FCFS Scheduler)
+---------------------------
+Increasing the number of processors does decrease the total execution time but not linearly. Going from one to two
+decreases it by 26.6, while from 2 to 4 by 6.6. This is because with 2 CPUs most of the work is already parallelized
+since there are only 8 processes and adding more beyond that gives diminishing returns, since I/O waiting time will dominate 
+and is not influenced by the number of CPUs.
+
+
+________________________
+Problem-2 (Round-Robin)
+------------------------
+The execution time stays the same whereas the waiting time decreases as the time slice decreases. This is 
+because the reduced time slice forces the CPU to schedule processes more frequently so they all get to run
+more regularly as the time slice decreases.
+However, in a real OS, this wouldn't always be ideal because context switches presents overhead, such as flushing the TLB,
+cold cache misses, etc. that will slow down the execution of the processes. Therefore, a balance must be maintained.
+
+
+
+________________________________
+Problem-3 (Preemptive Priority)
+--------------------------------
+The solution to starvation in operating systems is aging, where the processor will gradually increase the priority
+of a process the longer it has been sitting in the ready queue. For example, a process waiting for longer than a threshold
+amount of time might have its priority incremented by 1 every N seconds. This ensures that even low-priority processes will eventually
+get executed and the CPU time will not get monopolized. 
+
+
+___________________________________________
+Problem-4 (The Priority Inversion Problem)
+-------------------------------------------
+We could implement an inheritance mechanism. When a high-priority process P1 blocks waiting on another process W to complete,
+we record this dependency and raise W's effective priority to match P1's. W is then scheduled using its new priority and once it finishes
+it signals P1, and its priority is restored to the original value.
